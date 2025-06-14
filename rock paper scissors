@@ -1,0 +1,66 @@
+import random
+
+def get_computer_choice():
+    """Randomly selects the computer's choice."""
+    choices = ["rock", "paper", "scissors"]
+    return random.choice(choices)
+
+def get_user_choice():
+    """Gets and validates the user's choice."""
+    while True:
+        user_input = input("Enter your choice (rock, paper, or scissors): ").lower().strip()
+        if user_input in ["rock", "paper", "scissors"]:
+            return user_input
+        else:
+            print("Invalid choice. Please enter 'rock', 'paper', or 'scissors'.")
+
+def determine_winner(user_choice, computer_choice):
+    """Determines the winner of the round."""
+    print(f"\nYou chose: {user_choice}")
+    print(f"Computer chose: {computer_choice}")
+
+    if user_choice == computer_choice:
+        return "It's a tie!"
+    elif (user_choice == "rock" and computer_choice == "scissors") or \
+         (user_choice == "paper" and computer_choice == "rock") or \
+         (user_choice == "scissors" and computer_choice == "paper"):
+        return "You win!"
+    else:
+        return "Computer wins!"
+
+def play_rock_paper_scissors():
+    """Main function to play Rock-Paper-Scissors."""
+    print("Welcome to Rock-Paper-Scissors!")
+
+    while True:
+        user_score = 0
+        computer_score = 0
+        
+        while True: # Loop for multiple rounds within one game
+            user_choice = get_user_choice()
+            computer_choice = get_computer_choice()
+            
+            result = determine_winner(user_choice, computer_choice)
+            print(result)
+
+            if "You win" in result:
+                user_score += 1
+            elif "Computer wins" in result:
+                computer_score += 1
+
+            print(f"Score: You {user_score} - Computer {computer_score}")
+
+            play_another_round = input("Play another round? (yes/no): ").lower().strip()
+            if play_another_round != 'yes':
+                break # Exit the inner round loop
+
+        print("\n--- Game Over ---")
+        print(f"Final Score: You {user_score} - Computer {computer_score}")
+
+        play_again = input("Do you want to play a new game? (yes/no): ").lower().strip()
+        if play_again != 'yes':
+            print("Thanks for playing! Goodbye.")
+            break # Exit the outer game loop
+
+if __name__ == "__main__":
+    play_rock_paper_scissors()

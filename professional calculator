@@ -1,0 +1,61 @@
+import math
+
+def professional_calculator_eval():
+    """
+    A professional command-line calculator using Python's eval() for parsing.
+    Supports basic arithmetic, parentheses, and some math functions.
+    """
+    print("Professional Calculator (Type 'quit' to exit)")
+    print("---------------------------------------------")
+    print("Supported operations: +, -, *, /, %, **, //")
+    print("Supported functions: sin(), cos(), tan(), sqrt(), log(), log10(), exp(), abs(), round()")
+    print("Use 'pi' for PI value.")
+
+    # Make common math functions and constants available to eval()
+    # This creates a dictionary of safe names that eval() can access
+    allowed_builtins = {
+        '__builtins__': None # Disable access to all built-in functions for security
+    }
+    allowed_math_functions = {
+        'pi': math.pi,
+        'sin': math.sin,
+        'cos': math.cos,
+        'tan': math.tan,
+        'sqrt': math.sqrt,
+        'log': math.log,   # Natural logarithm
+        'log10': math.log10, # Base-10 logarithm
+        'exp': math.exp,
+        'abs': abs,
+        'round': round
+    }
+
+    while True:
+        expression = input("Enter expression: ").strip()
+
+        if expression.lower() == 'quit':
+            print("Exiting calculator. Goodbye!")
+            break
+
+        if not expression:
+            continue # Don't process empty input
+
+        try:
+            # Use eval() with a restricted scope for safety
+            # The second argument (globals) limits what eval() can access
+            # The third argument (locals) could be used too, but not needed here.
+            result = eval(expression, allowed_builtins, allowed_math_functions)
+            print(f"Result: {result}")
+        except SyntaxError:
+            print("Error: Invalid expression. Please check your syntax.")
+        except NameError as e:
+            print(f"Error: Unknown function or variable '{e}'.")
+        except TypeError as e:
+            print(f"Error: Type error in expression. Check function arguments. ({e})")
+        except ZeroDivisionError:
+            print("Error: Division by zero.")
+        except Exception as e:
+            print(f"An unexpected error occurred: {e}")
+
+# Run the calculator
+if __name__ == "__main__":
+    professional_calculator_eval()

@@ -1,0 +1,59 @@
+import random
+
+def roll_dice(num_dice=1):
+    """
+    Simulates rolling one or more dice.
+
+    Args:
+        num_dice (int): The number of dice to roll. Defaults to 1.
+
+    Returns:
+        list: A list containing the results of each die roll.
+    """
+    results = []
+    for _ in range(num_dice):
+        # Generate a random integer between 1 and 6 (inclusive) for each die
+        roll = random.randint(1, 6)
+        results.append(roll)
+    return results
+
+def dice_simulator():
+    """
+    Main function for the interactive dice simulator.
+    """
+    print("Welcome to the Dice Simulator!")
+
+    while True:
+        try:
+            num_dice_str = input("How many dice do you want to roll? (Enter a number or 'q' to quit): ").strip().lower()
+
+            if num_dice_str == 'q':
+                print("Thanks for playing! Goodbye.")
+                break
+
+            num_dice = int(num_dice_str)
+
+            if num_dice <= 0:
+                print("Please enter a positive number of dice.")
+                continue
+
+            rolls = roll_dice(num_dice)
+
+            if num_dice == 1:
+                print(f"You rolled a: {rolls[0]}")
+            else:
+                print(f"You rolled: {rolls}")
+                print(f"Total: {sum(rolls)}")
+
+            play_again = input("Roll again? (yes/no): ").strip().lower()
+            if play_again != 'yes':
+                print("Thanks for playing! Goodbye.")
+                break
+
+        except ValueError:
+            print("Invalid input. Please enter a number or 'q'.")
+        except Exception as e:
+            print(f"An error occurred: {e}")
+
+if __name__ == "__main__":
+    dice_simulator()

@@ -1,0 +1,30 @@
+# Function to check if a number is prime
+def is_prime(n):
+    """Check if a number is prime."""
+    if n <= 1:
+        return False  # Numbers <= 1 are not prime
+    
+    for i in range(2, int(n ** 0.5) + 1):  # Loop from 2 to sqrt(n)
+        if n % i == 0:  # If divisible by i, it's not prime
+            return False
+    
+    return True  # If no divisors found, it's prime
+
+# Main Program Loop
+while True:
+    try:
+        num = int(input("Enter a positive integer (or '-1' to exit): "))
+
+        # Exit condition
+        if num == -1:
+            print("Exiting the program. Goodbye!")
+            break  # Stop the loop
+        
+        # Check if the number is prime and print result
+        if is_prime(num):
+            print(f"{num} is a Prime Number.")
+        else:
+            print(f"{num} is NOT a Prime Number.")
+
+    except ValueError:
+        print("Invalid input! Please enter a valid positive integer.")

@@ -1,0 +1,24 @@
+def divide_numbers():
+    try:
+        # Taking user input
+        num1 = float(input("Enter the first number: "))
+        num2 = float(input("Enter the second number: "))
+
+        # Performing division
+        result = num1 / num2
+
+    except ValueError:
+        # Handles invalid input (e.g., entering letters instead of numbers)
+        print("Error: Please enter valid numbers.")
+    except ZeroDivisionError:
+        # Handles division by zero error
+        print("Error: Division by zero is not allowed.")
+    else:
+        # Executes if no exception occurs
+        print(f"Result: {result:.2f}")
+    finally:
+        # Executes whether an exception occurs or not
+        print("Execution completed.")
+
+# Run the function
+divide_numbers()

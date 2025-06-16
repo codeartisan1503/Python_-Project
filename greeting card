@@ -1,0 +1,46 @@
+# Personalized Greeting Generator
+
+def get_user_details():
+    """
+    Collects user details for the personalized greeting.
+    """
+    print("Welcome to the Personalized Greeting Generator!")
+    sender_name = input("What is your name? ")
+    recipient_name = input("Who is this message for? ")
+    occasion = input("What is the occasion (e.g., Birthday, Anniversary, etc.)? ")
+    custom_message = input("Write a short personal message to include (optional): ")
+    return sender_name, recipient_name, occasion, custom_message
+
+def generate_greeting(sender_name, recipient_name, occasion, custom_message):
+    """
+    Generates a personalized greeting message.
+    """
+    # Default greeting message
+    greeting = f"Dear {recipient_name},\n\n"
+
+    # Add occasion-specific line
+    if occasion:
+        greeting += f"Happy {occasion}! 🎉\n"
+
+    # Add custom message if provided
+    if custom_message.strip():
+        greeting += f"{custom_message}\n\n"
+
+    # Closing line with sender name
+    greeting += f"Best wishes,\n{sender_name}"
+    return greeting
+
+def main():
+    # Get user details
+    sender_name, recipient_name, occasion, custom_message = get_user_details()
+
+    # Generate and display greeting
+    personalized_greeting = generate_greeting(sender_name, recipient_name, occasion, custom_message)
+    print("\nYour Personalized Greeting:\n")
+    print("=" * 40)
+    print(personalized_greeting)
+    print("=" * 40)
+
+# Run the script
+if __name__ == "__main__":
+    main()
